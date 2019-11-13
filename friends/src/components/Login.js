@@ -5,13 +5,13 @@ function clg(...x) {
 	for (let exes of x) console.log(exes);
 }
 
-const URL = "http://localhost:5000/api/"
+const URL = "http://localhost:5000/api"
 
 export default function Login() {
 	const [credentials, setCredentials] = useState({ username: "", password: "" });
 	const [isLoggedIn, setIsLoggedIn] = useState({isLoggedIn: false});
 
-	// console.log(isLoggedIn);
+	console.log(isLoggedIn);
 	
 	// control form fields
 	const handleChange = e => {
@@ -23,7 +23,7 @@ export default function Login() {
 	const loginAction = e => {
 		e.preventDefault();
 		axios
-			.post(`${URL}login`, credentials)
+			.post(`${URL}/login`, credentials)
 			.then(res => {
 				// clg(res.data)
 				sessionStorage.setItem("token", res.data.payload)

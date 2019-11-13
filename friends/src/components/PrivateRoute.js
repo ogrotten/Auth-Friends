@@ -6,16 +6,19 @@ const isAuthent = () => {
 }
 
 export default function PrivateRoute({ children, ...rest }) {
-	const redir = <Redirect /* to={{
-		pathname: "/login",
-		state: { from: location }
-	}}  *//>;
+	// const redir = <Redirect to={{
+	// 	pathname: "/login",
+	// 	state: { from: location }
+	// }} />;
 
 	return (
 		<Route
 			{...rest}
 			render={({ location }) =>
-				isAuthent() ? (children) : (redir)
+				isAuthent() ? (children) : (<Redirect to={{
+					pathname: "/login",
+					state: { from: location }
+				}} />)
 			}
 		/>
 	)

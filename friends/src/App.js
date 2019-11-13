@@ -5,6 +5,7 @@ import {
 	Link,
 	Switch
 } from "react-router-dom";
+// import Login from "./components/Login"
 
 import Login from "./components/Login";
 import PrivateRoute from "./components/PrivateRoute";
@@ -16,7 +17,9 @@ function App() {
 	return (
 		<Router>
 			<div className="App" >
-				<Login />
+				<p><Link to="/login">LOGIN</Link></p>
+				<p><Link to="/friendlist">FriendList</Link></p>
+				{/* <Login /> */}
 				<Switch>
 					<PrivateRoute path="/friendlist">
 						<FriendList />

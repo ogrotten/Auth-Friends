@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from "react"; 
 import axios from "axios";
+// import Friend from "./Friend";
 
 function clg(...x) {
 	for (let exes of x) console.log(exes);
 }
 
-const URL = "http://localhost:5000/api/"
+const URL = "http://localhost:5000/api"
 
 const axiosWithAuth = () => {
 	return axios.create({
@@ -23,14 +24,23 @@ export default function FriendList () {
 	})
 
 	const getData = () => {
+		// get full friendlist
 		const authAxios = axiosWithAuth();
 		authAxios
-		.get(URL)
+		.get(`${URL}/friends`)
 		.then(res => {
 			clg(res.data)
 			setFriendsAll(res.data);
 		})
 	}
 
-	
+
+	return (
+		<div>
+			{friendsAll.map(e => (
+				<div>{e}</div>
+			))}
+		</div>
+	)
+
 }
