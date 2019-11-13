@@ -7,7 +7,7 @@ function clg(...x) {
 
 const URL = "http://localhost:5000/api"
 
-export default function Login() {
+export default function Login(props) {
 	const [credentials, setCredentials] = useState({ username: "", password: "" });
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -27,6 +27,7 @@ export default function Login() {
 				// clg(res.data)
 				sessionStorage.setItem("token", res.data.payload)
 				setIsLoggedIn(true);
+				props.history.push("/friendlist");
 			})
 			.catch(err => clg(err))
 	}
@@ -41,7 +42,7 @@ export default function Login() {
 	}, [])
 	
 	const pass = "i<3Lambd4"
-	console.log(isLoggedIn);
+	// console.log(props);
 
 	return (
 		<>
