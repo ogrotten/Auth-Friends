@@ -9,9 +9,8 @@ const URL = "http://localhost:5000/api"
 
 export default function Login() {
 	const [credentials, setCredentials] = useState({ username: "", password: "" });
-	const [isLoggedIn, setIsLoggedIn] = useState({isLoggedIn: false});
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-	console.log(isLoggedIn);
 	
 	// control form fields
 	const handleChange = e => {
@@ -35,13 +34,14 @@ export default function Login() {
 	// 
 	useEffect(() => {
 		if (sessionStorage.getItem("token")) {
-			setIsLoggedIn({ ...isLoggedIn, isLoggedIn: true });
+			setIsLoggedIn( true );
 		} else {
-			setIsLoggedIn({ ...isLoggedIn, isLoggedIn: false });
+			setIsLoggedIn( false );
 		}
 	}, [])
-
+	
 	const pass = "i<3Lambd4"
+	console.log(isLoggedIn);
 
 	return (
 		<>
