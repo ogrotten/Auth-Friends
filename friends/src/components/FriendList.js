@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react"; 
 import axios from "axios";
-// import Friend from "./Friend";
+import NewFriend from "./NewFriend";
 
 function clg(...x) {
 	for (let exes of x) console.log(exes);
@@ -15,6 +15,7 @@ const axiosWithAuth = () => {
 		}
 	})
 }
+
 export default function FriendList () {
 	const [friendsAll, setFriendsAll] = useState([]);
 
@@ -36,7 +37,8 @@ export default function FriendList () {
 
 
 	return (
-		<div>
+		<div className="list">
+			<NewFriend axiosWithAuth={axiosWithAuth}/>
 			{friendsAll.map(e => (
 				<div>{e.name}, {e.email}</div>
 			))}

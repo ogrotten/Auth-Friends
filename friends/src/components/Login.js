@@ -29,6 +29,7 @@ export default function Login() {
 				sessionStorage.setItem("token", res.data.payload)
 				setIsLoggedIn(true);
 			})
+			.catch(err => clg(err))
 	}
 
 	// 
