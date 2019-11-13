@@ -2,33 +2,45 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 function clg(...x) {
-    for (let exes of x) console.log(exes);
+	for (let exes of x) console.log(exes);
 }
+
+const URL = "http://localhost:5000/api/"
 
 export default function Login() {
 	const [credentials, setCredentials] = useState({ username: "", password: "" });
-	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const [isLoggedIn, setIsLoggedIn] = useState({isLoggedIn: false});
 
-	// console.log(setCredentials, setIsLoggedIn);
-	// console.log(credentials, isLoggedIn);
-
+	// console.log(isLoggedIn);
+	
 	// control form fields
 	const handleChange = e => {
-		clg(credentials);
+		// clg(credentials);
 		setCredentials({ ...credentials, [e.target.name]: e.target.value })
 	}
 
+	// form submit
 	const loginAction = e => {
-
+		e.preventDefault();
+		axios
+			.post(`${URL}login`, credentials)
+			.then(res => {
+				// clg(res.data)
+				sessionStorage.setItem("token", res.data.payload)
+				setIsLoggedIn(true);
+			})
 	}
 
-	// useEffect(() => {
-	// 	if (sessionStorage.getItem("token")) {
-	// 		setIsLoggedIn({ ...isLoggedIn, isLoggedIn: true });
-	// 	} else {
-	// 		setIsLoggedIn({ ...isLoggedIn, isLoggedIn: false });
-	// 	}
-	// }, [isLoggedIn])
+	// 
+	useEffect(() => {
+		if (sessionStorage.getItem("token")) {
+			setIsLoggedIn({ ...isLoggedIn, isLoggedIn: true });
+		} else {
+			setIsLoggedIn({ ...isLoggedIn, isLoggedIn: false });
+		}
+	}, [])
+
+	const pass = "i<3Lambd4"
 
 	return (
 		<>
@@ -36,6 +48,7 @@ export default function Login() {
 				{isLoggedIn ? "Logged In" : "Do a logging in plz"}
 			</p>
 			<form onSubmit={loginAction}>
+				<p>Lambda School ::  {pass}</p>
 				<input type="text" name="username" value={credentials.username} onChange={handleChange} />
 				<input type="password" name="password" value={credentials.password} onChange={handleChange} />
 				<button>login</button>
