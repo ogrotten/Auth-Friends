@@ -21,7 +21,7 @@ export default function FriendList () {
 	useEffect(() => {
 		getData();
 		sessionStorage.getItem("token") ? clg("+++ AUTHENT") : clg("--- UNVERIFIED")
-	})
+	},[])
 
 	const getData = () => {
 		// get full friendlist
@@ -29,7 +29,7 @@ export default function FriendList () {
 		authAxios
 		.get(`${URL}/friends`)
 		.then(res => {
-			clg(res.data)
+			console.log(res.data);
 			setFriendsAll(res.data);
 		})
 	}
@@ -38,7 +38,7 @@ export default function FriendList () {
 	return (
 		<div>
 			{friendsAll.map(e => (
-				<div>{e}</div>
+				<div>{e.name}, {e.email}</div>
 			))}
 		</div>
 	)
