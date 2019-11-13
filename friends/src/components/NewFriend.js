@@ -16,7 +16,7 @@ const axiosWithAuth = () => {
 }
 
 export default function NewFriend(props) {
-	const [newUser, setNewUser] = useState({ username: "", email: "", age:"" })
+	const [newUser, setNewUser] = useState({ name: "", email: "", age:"" })
 
 	const handleChange = e => {
 		// clg(newUser);
@@ -29,7 +29,8 @@ export default function NewFriend(props) {
 		authAxios
 			.post(`${URL}/friends`, newUser)
 			.then(res => {
-				// clg(res.data)
+				clg(res.data)
+				props.setFriendsAll(res.data);
 			})
 			.catch(err => clg(err))
 	}
@@ -37,7 +38,7 @@ export default function NewFriend(props) {
 	return (
 		<>
 			<form onSubmit={addAction}>
-				<input type="text" name="username" value={newUser.username} onChange={handleChange} placeholder="name" />
+				<input type="text" name="name" value={newUser.name} onChange={handleChange} placeholder="name" />
 				<input type="text" name="age" value={newUser.age} onChange={handleChange} placeholder="age" />
 				<input type="text" name="email" value={newUser.email} onChange={handleChange} placeholder="email" />
 				<button>Add</button>

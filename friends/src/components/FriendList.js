@@ -19,11 +19,6 @@ const axiosWithAuth = () => {
 export default function FriendList () {
 	const [friendsAll, setFriendsAll] = useState([]);
 
-	useEffect(() => {
-		getData();
-		sessionStorage.getItem("token") ? clg("+++ AUTHENT") : clg("--- UNVERIFIED")
-	},[])
-
 	const getData = () => {
 		// get full friendlist
 		const authAxios = axiosWithAuth();
@@ -35,10 +30,15 @@ export default function FriendList () {
 		})
 	}
 
+	useEffect(() => {
+		getData();
+		sessionStorage.getItem("token") ? clg("+++ AUTHENT") : clg("--- UNVERIFIED")
+	},[])	
+
 
 	return (
 		<div className="list">
-			<NewFriend axiosWithAuth={axiosWithAuth}/>
+			<NewFriend friendsAll={friendsAll} setFriendsAll={setFriendsAll}/>
 			{friendsAll.map(e => (
 				<div>{e.name}, {e.email}</div>
 			))}
